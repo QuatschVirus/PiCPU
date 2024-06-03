@@ -8,6 +8,35 @@ Nothing happens
 Copy data from the first specified register to the second specified register
 ### `02` `rst` Reset
 Resets the specified register
+### `03` `stc` Set Carry
+Sets the carry bit to the lowest order bit (`[0]`)
+### `04` `ccn` Copy To Carry As NOT
+Copies the inverse of the masked bit to the carry bit
+The mask is the lower 8 bits, the source register is the upper 8 bits
+### `05` `cco` Copy To Carry As OR
+Copies the OR of the masked bits to the carry bit
+The mask is the lower 8 bits, the source register is the upper 8 bits
+### `06` `cca` Copy To Carry As AND
+Copies the AND of the masked bits to the carry bit
+The mask is the lower 8 bits, the source register is the upper 8 bits
+### `07` `ccx` Copy To Carry As XOR
+Copies the XOR of the masked bits to the carry bit
+The mask is the lower 8 bits, the source register is the upper 8 bits
+### `08` `rqd` Request Data
+Sets the RQD pin of the specified port high
+Allows the device to ready the data so the program doesn't wait so long when actually reading it
+### `09` `rdd` Ready Data
+Sets the RDD pin of the specified port high
+Allows the device to prepare for receiving data so the program doesn't have to wait so long upon sending it
+### `0A`
+### `0B`
+### `0C` 
+### `0D`
+### `0E` `sml` Set Masked Low
+Sets the bits masked by the second register in the first register Low (0)
+### `0F` `smh` Set Masked High
+Sets the bits masked by the second register in the first register High (1)
+
 ## `1X` `ldd` Load Data Direct
 Directly loads data into the [[Registers#Primary Targets (`0?`)]] register specified by `X`
 Example:
@@ -61,6 +90,7 @@ A ^ B = C
 ~(A ^ B) = C
 ### `33` `neg` Negate
 -A = B
+
 ## Program Flow Control
 ### `F0` `jmp` Jump
 Jumps to the specified line without any condition
@@ -78,17 +108,23 @@ Jumps to the line specified by the register if the carry bit in the [[Registers#
 Jumps to the line specified by the register if the [[Registers#`07` X]] register is zero
 ### `F7` `jry` Jump To Register If Y Zero
 Jumps to the line specified register if the [[Registers#`08` Y]] register is zero
-### `F8` `wtc` Wait For Clock
-Wait the specified amount of clock cycles
-### `F9` `wtm` Wait Milliseconds
+### `F8` `wtp` Wait For Clock Pulses
+Wait the specified amount of clock pulses (C1)
+### `F9` `wtc` Wait For Clock Cycles
+Wait the specified amount of clock cycles (C2)
+### `FA` `wtm` Wait Milliseconds
 Wait the specified amount of milliseconds
-### `FA` `wti` Wait For Interrupt
+### `FB` `wti` Wait For Interrupt
 Wait until the the specified interrupt is invoked. The interrupt will be reset after the instruction
-### `FB` `spz` Select Program At Zero
+### `FC` `spz` Select Program At Zero
 Change the active program and begin executing it at line zero
-### `FC` `spm` Select Program at Memory
+### `FD` `spm` Select Program at Memory
 Change the active program and begin executing it at the last stored address in the Counter Memory
-### `FD`
 ### `FE` `tri` Trigger Interrupt
 Raises the specified interrupt if allowed
 ### `FF` `end` End Program
+## Routines
+### `>ivc` Invert Carry
+```
+ccn 0C [6]
+```

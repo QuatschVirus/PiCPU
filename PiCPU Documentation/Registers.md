@@ -70,6 +70,5 @@ Writing places the interrupt in the interrupt queue, and ensures the IRQ flag is
 Reading reads the last interrupt and removes it from the queue.
 The queue can hold 16 interrupts
 ## Ports (>= `70`)
-**`1XXX XXXY`**
-`X` indicates the 6 bits used as the port address, allowing up to 64 ports to be directly controlled
-If Y is low, the address points to the port's control register, otherwise to the data register
+**`1XXX XXXX`**
+`X` indicates the bits used as the port address, allowing up to 128 ports to be directly controlled
