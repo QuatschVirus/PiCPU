@@ -9,9 +9,9 @@ All of these can be represented by 4 bits, allowing them to be run as "primary" 
 ### `06` F
 ### `07` X
 ### `08` Y
-### `09` Memory Address (`MA`)
-### `0A` Memory Data (`MD`)
-### `0B` Program Selector (`PS`)
+### `09` 
+### `0A` Memory Address (`MA`)
+### `0B` Memory Data (`MD`)
 ### `0C` System Flags (`SF`)
 `IC?? ????`
 #### `I`IRQ
